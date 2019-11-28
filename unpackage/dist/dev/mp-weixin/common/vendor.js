@@ -1,42 +1,46 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],{
 
 /***/ 0:
-/*!**********************************!*\
-  !*** F:/appShen/shenApp/main.js ***!
-  \**********************************/
+/*!****************************!*\
+  !*** F:/git/appH5/main.js ***!
+  \****************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(createApp) {__webpack_require__(/*! uni-pages */ 4);
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 5));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 5));
 
-_vue.default.config.productionTip = false;
+
+var _ajax = __webpack_require__(/*! @/ajax.js */ 8);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}_vue.default.config.productionTip = false;
+
 
 _App.default.mpType = 'app';
-// 
-// let login = uni.getStorageSync('login');
-// let time = uni.getStorageSync('time')
-// console.log(time)
-// if(time !=''){
-// 	let timeStatus = setInterval(()=>{
-// 		let timeData = (new Date()).getTime();
-// 		if(timeData >= time){
-// 			clearInterval(timeStatus)
-// 			uni.removeStorageSync('time');
-// 			uni.removeStorageSync('login');
-// 			uni.navigateTo({
-// 				url: '/pages/login/login'
-// 			})
-// 			
-// 		}
-// 	},1000)
-// }else{
-// 	uni.navigateTo({
-// 		url: '/pages/login/login'
-// 	})
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var app = new _vue.default(_objectSpread({},
 _App.default));
 
@@ -778,7 +782,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1515,7 +1519,7 @@ uni$1;exports.default = _default;
 
 /***/ }),
 
-/***/ 10:
+/***/ 11:
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
   \********************************************************************/
@@ -1619,90 +1623,6 @@ function normalizeComponent (
   }
 }
 
-
-/***/ }),
-
-/***/ 11:
-/*!*******************************************************************!*\
-  !*** F:/appShen/shenApp/main.js?{"page":"pages%2Findex%2Findex"} ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/index/index.vue */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_index.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
-
-/***/ }),
-
-/***/ 17:
-/*!**********************************!*\
-  !*** F:/appShen/shenApp/ajax.js ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.ajax = exports.setTime = exports.showTips = void 0;var ohref = '';
-//#ifdef H5
-if (true) {
-  ohref = '/dpc';
-} else {}
-//#endif
-
-// #ifdef H5-WEIXIN
-ohref = 'https://api.fanep.cn/tt';
-// #endif
-
-/**
- * 弹出提示框。
- *@title type：string 提示的内容
- *@icon  type：string 提示的图标，参考微信api接口。
- */
-var showTips = function showTips(title, icon) {
-  uni.showToast({
-    title: title,
-    icon: icon || 'none' });
-
-};exports.showTips = showTips;
-
-var setTime = function setTime(time) {
-  var actTime = new Date().getTime();
-  var mm = Math.ceil((actTime - new Date(time).getTime()) / 1000);
-  var day = parseInt(mm / (60 * 60 * 24));
-  var mday = mm % (60 * 60 * 24);
-  var h = parseInt(mday / (60 * 60));
-  var mh = mday % (60 * 60);
-  var m = parseInt(mh / 60);
-  var name = 0;
-  if (day > 0) {
-    name = day + '天前';
-    return name;
-  } else if (h > 0) {
-    name = h + '小时前';
-    return name;
-  } else {
-    name = m + '分钟前';
-    return name;
-  }
-};exports.setTime = setTime;
-
-
-var ajax = {
-  login: ohref + '/login',
-  signup: ohref + '/signup',
-  onewordperday: ohref + '/post/onewordperday',
-  userinfo: ohref + '/get/userinfo',
-  allperday: ohref + '/get/allonewordperday',
-  detail: ohref + '/get/onewordperday-detail/',
-  reply: ohref + '/post/reply',
-  replyreply: ohref + '/post/reply-reply',
-  wxlogin: ohref + '/wx-login' };exports.ajax = ajax;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
@@ -7174,7 +7094,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7195,14 +7115,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7278,7 +7198,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -7656,9 +7576,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 20:
-/*!****************************************************************************!*\
-  !*** F:/appShen/shenApp/main.js?{"page":"pages%2Farticle%2Farticle_list"} ***!
-  \****************************************************************************/
+/*!**********************************************************************!*\
+  !*** F:/git/appH5/main.js?{"page":"pages%2Farticle%2Farticle_list"} ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7673,9 +7593,9 @@ createPage(_article_list.default);
 /***/ }),
 
 /***/ 26:
-/*!*****************************************************************************!*\
-  !*** F:/appShen/shenApp/main.js?{"page":"pages%2Findex%2Farticle_details"} ***!
-  \*****************************************************************************/
+/*!***********************************************************************!*\
+  !*** F:/git/appH5/main.js?{"page":"pages%2Findex%2Farticle_details"} ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7721,9 +7641,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 34:
-/*!*******************************************************************!*\
-  !*** F:/appShen/shenApp/main.js?{"page":"pages%2Flogin%2Flogin"} ***!
-  \*******************************************************************/
+/*!*************************************************************!*\
+  !*** F:/git/appH5/main.js?{"page":"pages%2Flogin%2Flogin"} ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7738,9 +7658,9 @@ createPage(_login.default);
 /***/ }),
 
 /***/ 4:
-/*!*************************************!*\
-  !*** F:/appShen/shenApp/pages.json ***!
-  \*************************************/
+/*!*******************************!*\
+  !*** F:/git/appH5/pages.json ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7749,10 +7669,10 @@ createPage(_login.default);
 
 /***/ }),
 
-/***/ 46:
-/*!*************************************************************************!*\
-  !*** F:/appShen/shenApp/main.js?{"page":"pages%2Findex%2Fnew_article"} ***!
-  \*************************************************************************/
+/***/ 42:
+/*!*******************************************************************!*\
+  !*** F:/git/appH5/main.js?{"page":"pages%2Findex%2Fnew_article"} ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7760,9 +7680,116 @@ createPage(_login.default);
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _new_article = _interopRequireDefault(__webpack_require__(/*! ./pages/index/new_article.vue */ 47));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _new_article = _interopRequireDefault(__webpack_require__(/*! ./pages/index/new_article.vue */ 43));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_new_article.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+
+/***/ 50:
+/*!*************************************************************!*\
+  !*** F:/git/appH5/main.js?{"page":"pages%2Findex%2Findex"} ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/index/index.vue */ 13));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_index.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+
+/***/ 8:
+/*!****************************!*\
+  !*** F:/git/appH5/ajax.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.ajax = exports.setTime = exports.hideLoading = exports.showLoading = exports.showTips = void 0;var ohref = '';
+
+
+
+
+
+
+
+
+
+
+ohref = 'https://tt.ilout.com/tt';
+
+
+console.log(ohref);
+/**
+                     * 弹出提示框。
+                     *@title type：string 提示的内容
+                     *@icon  type：string 提示的图标，参考微信api接口。
+                     */
+var showTips = function showTips(title, icon) {
+  uni.showToast({
+    title: title,
+    icon: icon || 'none' });
+
+};
+
+/***
+    * 加载数据时的Loading。
+    * 加上mask是为了防止loading时，用户操作。
+    */exports.showTips = showTips;
+var showLoading = function showLoading(title) {
+  uni.showLoading({
+    title: title || '',
+    mask: true });
+
+};
+/**
+    * 隐藏Loading。
+    * 要和showLoading成对使用。
+    */exports.showLoading = showLoading;
+var hideLoading = function hideLoading() {
+  uni.hideLoading();
+};exports.hideLoading = hideLoading;
+
+
+var setTime = function setTime(time) {
+  var actTime = new Date().getTime();
+  var mm = Math.ceil((actTime - new Date(time).getTime()) / 1000);
+  var day = parseInt(mm / (60 * 60 * 24));
+  var mday = mm % (60 * 60 * 24);
+  var h = parseInt(mday / (60 * 60));
+  var mh = mday % (60 * 60);
+  var m = parseInt(mh / 60);
+  var name = 0;
+  if (day > 0) {
+    name = day + '天前';
+    return name;
+  } else if (h > 0) {
+    name = h + '小时前';
+    return name;
+  } else {
+    name = m + '分钟前';
+    return name;
+  }
+};exports.setTime = setTime;
+
+
+var ajax = {
+  login: ohref + '/login',
+  signup: ohref + '/signup',
+  onewordperday: ohref + '/post/onewordperday',
+  userinfo: ohref + '/get/userinfo',
+  allperday: ohref + '/get/allonewordperday',
+  detail: ohref + '/get/onewordperday-detail/',
+  reply: ohref + '/post/reply',
+  replyreply: ohref + '/post/reply-reply',
+  wxlogin: ohref + '/wx-login' };exports.ajax = ajax;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 

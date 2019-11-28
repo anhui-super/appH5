@@ -6,43 +6,122 @@
 				<view class="name">{{item.author}}</view>
 			</view>
 		</view>
+		
+		<view class="sidbar" @click="sedbarBtn">
+			<view class="icon"></view>
+			<button class="icon" withCredentials="true" open-type="getUserInfo" @getuserinfo="bindGetUserInfo"></button>
+		</view>
 	</view>
 </template>
 
 <script>
-	import {ajax} from '@/ajax.js'
+	import {ajax,showLoading,hideLoading} from '@/ajax.js'
 	export default {
 		data() {
 			return {
-				list:[]
+				list:[],
+				userinfo:'',
+				canIUse: uni.canIUse('button.open-type.getUserInfo')
 			}
 		},
 		onLoad() {
-			let _this = this;
-			let login = uni.getStorageSync('login')
-			if(login!=''&&login!=null&&login!=undefined){
-				uni.request({
-					url: ajax.allperday, //仅为示例，并非真实接口地址。
-					header:{
-						Authorization:'bearer' +' '+ login
-					},
-					data:{},
-					success: (res) => {
-						if(res.data.code==200){
-							_this.list = res.data.data
-						}
-					}
+			let _this = this
+			uni.setNavigationBarTitle({
+				title: '首页'
+			});
+			// #ifdef MP-WEIXIN
+			uni.login({
+			  provider: 'weixin',
+			  success: function (loginRes) {
+				uni.getUserInfo({
+				  provider: 'weixin',
+				  success: function (infoRes) {
+					  _this.userinfo = infoRes.userInfo
+				  }
 				});
+			  }
+			});
+			// #endif
+		},
+		onShow() {
+			let _this = this
+			let login = uni.getStorageSync('login')
+			if(login==''||login==null||login==undefined){
+				// #ifdef MP-WEIXIN
+				uni.login({  
+					success: function(res) { 
+						uni.request({
+							url: ajax.wxlogin, //仅为示例，并非真实接口地址。
+							header:{
+								'Content-Type':'application/x-www-form-urlencoded'
+							},
+							data:{
+								code:res.code
+							},
+							method:'POST',
+							success: (res) => {
+								if(res.data.code==200){
+									let timeData = (new Date()).getTime() + 1000 * 60 * 60 * 2;
+									uni.setStorageSync('login', res.data.data.token);
+									uni.setStorageSync('time', timeData);
+									_this.info()
+								}
+							}
+						});
+					}  
+				});
+			    // #endif
+				// #ifdef H5
+					uni.navigateTo({
+						url: '/pages/login/login'
+					})
+				// #endif
+			}else{
+				_this.info()
 			}
-			 uni.login({  
-                success: function(res) {  
-					console.log(res)
-                    // 获取code  
-                    // console.log(JSON.stringify(res));  
-                }  
-            });  
 		},
 		methods: {
+			sedbarBtn(){
+				// #ifdef H5
+					let login = uni.getStorageSync('login')
+					if(login!=''&&login!=null&&login!=undefined){
+						uni.navigateTo({
+							url: '/pages/index/new_article'
+						})
+					}
+					
+				// #endif
+			},
+			
+			bindGetUserInfo(e){
+				this.userinfo = e.detail.userInfo;
+				if(this.userinfo!=''){
+					uni.navigateTo({
+						url: '/pages/index/new_article'
+					})
+				}
+				console.log('1111',e)
+			},
+			info(){
+				let _this = this;
+				let login = uni.getStorageSync('login')
+				if(login!=''&&login!=null&&login!=undefined){
+					showLoading()
+					uni.request({
+						url: ajax.allperday, //仅为示例，并非真实接口地址。
+						header:{
+							Authorization:'bearer' +' '+ login
+						},
+						data:{},
+						success: (res) => {
+							if(res.data.code==200){
+								hideLoading()
+								_this.list = res.data.data
+							}
+						}
+					});
+				}
+			},
 			itemBtn(id){
 				uni.navigateTo({
 					url: '/pages/index/article_details?id='+id
@@ -52,7 +131,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	.content{
 		padding: 20upx 25upx;
 	}
@@ -90,5 +169,29 @@
 		padding: 0 10upx 3upx;
 		border-bottom: 1px solid #555555;
 		/* margin-top: 20upx; */
+	}
+	.sidbar{
+		position: fixed;
+		right: 20upx;
+		bottom: 20upx;
+		width: 80upx;
+		height: 80upx;
+		border-radius: 50%;
+		overflow: hidden;
+		button{
+			opacity: 0
+		}
+		.icon{
+			position: absolute;
+			top: 0;
+			left: 0;
+			line-height: 80upx;
+			font-size: 24upx;
+			width: 100%;
+			height: 100%;
+			text-align: center;
+			background: url('https://img2.loho88.com/ilout/icon.png') 0 0 no-repeat;
+			background-size: 100%;
+		}
 	}
 </style>

@@ -75,25 +75,30 @@
         "usingComponents" : true
     },
     "h5" : {
+        "title" : "朋友圈", //页面标题，默认使用 manifest.json 的 name
+        "template" : "/h5/", //index.html模板路径，相对于应用根目录，可定制生成的 html 代码
         "router" : {
             "mode" : "history"
         },
         "devServer" : {
-			"port" : 3001, //端口号
-			"disableHostCheck" : true,
-			"proxy" : {
-			    "/dpc" : {
-			        "target" : "http://api.fanep.cn/tt",
-			        "changeOrigin" : true,
-			        "secure" : false,
-			        "pathRewrite" : {
-			            "^/dpc" : ""
-			        }
-			    }
-			}
+            // "port" : 8080, //端口号
+            // "disableHostCheck" : true,
+            "proxy" : {
+                "/dpc" : {
+                    "target" : "https://tt.ilout.com/tt",
+                    "changeOrigin" : true,
+                    "secure" : false,
+                    "pathRewrite" : {
+                        "^/dpc" : ""
+                    }
+                }
+            },
+            "https" : false,
+            "port" : ""
         },
         "sdkConfigs" : {
             "maps" : {}
-        }
+        },
+        "domain" : "m.ilout.com"
     }
 }

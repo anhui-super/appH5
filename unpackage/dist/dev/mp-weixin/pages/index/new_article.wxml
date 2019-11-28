@@ -1,1 +1,1 @@
-<view></view>
+<view class="content data-v-8dfebf9a"><textarea class="txtContent data-v-8dfebf9a" maxlength="-1" placeholder="这一刻的想法..." data-event-opts="{{[['input',[['__set_model',['','blog','$event',[]]]]]]}}" value="{{blog}}" bindinput="__e"></textarea><button class="submitBtn data-v-8dfebf9a" size="mini" type="primary" data-event-opts="{{[['tap',[['onewordperday',['$event']]]]]}}" bindtap="__e">发布</button></view>

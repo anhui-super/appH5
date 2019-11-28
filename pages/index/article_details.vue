@@ -1,14 +1,14 @@
 <template>
-	<view class="details">
+	<view class="details" :style="'height:'+auheight+'px'">
 		<view class="userImg"></view>
-		<view class="content">
+		<view class="content" >
 			<view class="userName">
 				<text class="txt">{{info.author}}</text>
 				<text class="auther">楼主</text>
 			</view>
 			<view class="userTime">{{info.newTime}}</view>
 			<rich-text class="text" :nodes="info.blog"></rich-text>
-			<view class="comments" v-if="info.comments.length>0">
+			<view class="comments" v-if="info!=''&&info.comments.length>0">
 				<view class="item" v-for="(item,index) in info.comments" :key="index">
 					<text class="one" @click="toUser(item)">{{item.author}} </text> 回复 {{item.replyTo}}: {{item.body}} <text class="time">{{item.newTime}}</text>
 				</view>
@@ -22,16 +22,22 @@
 		
 		<view class="foot">
 			<text class="toName" v-if="toUserName!=''">@ {{toUserName}} </text>
-			<input class="edit" type="text" v-model="comment" placeholder="我也说两句..." @confirm="submit" />
+			<input class="edit uni-input" 
+			type="text" v-model="comment" 
+			placeholder="我也说两句..." 
+			@confirm="submit" 
+			@blur="blurFun"
+			@focus="focusFun"/>
 		</view>
 	</view>
 </template>
 
 <script>
-	import {ajax,setTime,showTips} from '@/ajax.js'
+	import {ajax,setTime,showTips,showLoading,hideLoading} from '@/ajax.js'
 	export default {
 		data() {
 			return {
+				auheight:'',
 				id:'',
 				info:'',  		//初始化数据
 				toUserName:'',  //留言的对象
@@ -40,26 +46,52 @@
 			}
 		},
 		onLoad(e) {
-			this.id = e.id
+			this.id = e.id;
+			uni.setNavigationBarTitle({
+				title: '详情'
+			});
 			this.infoFun()
 		},
+		onShow() {
+			let _this = this
+			uni.getSystemInfo({
+				success: function (res) {
+					_this.auheight = res.windowHeight
+				}
+			});
+		},
 		methods: {
+			focusFun(e){
+				this.auheight= this.auheight - e.detail.height;
+			},
+			blurFun(e){
+				let _this = this
+				uni.getSystemInfo({
+					success: function (res) {
+						_this.auheight = res.windowHeight
+					}
+				});
+			},
 			infoFun(){
 				let _this = this;
 				let login = uni.getStorageSync('login')
 				if(login!=''&&login!=null&&login!=undefined){
+					showLoading()
 					uni.request({
 						url: ajax.detail+ this.id, //仅为示例，并非真实接口地址。
 						header:{
 							Authorization:'bearer' +' '+ login
 						},
 						success: (res) => {
+							hideLoading()
 							if(res.data.code==200){
 								_this.info = res.data.data;
 								_this.info.newTime = setTime(res.data.data.date)
-								_this.info.comments.map(es=>{
-									es.newTime = setTime(es.date)
-								})
+								if(_this.info.comments.length>0){
+									_this.info.comments.map(es=>{
+										es.newTime = setTime(es.date)
+									})
+								}
 							}
 						}
 					});
@@ -125,8 +157,15 @@
 
 <style lang="scss">
 	.details{
-		padding: 20upx 20upx 20upx 100upx;
-		position: relative;
+		// padding: 20upx 20upx 20upx 100upx;
+		
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		box-sizing: border-box;
+		overflow-y: auto;
 		.userImg{
 			width:70upx;
 			height: 70upx;
@@ -139,6 +178,11 @@
 		.content{
 			font-size: 28upx;
 			color: #333;
+			height: calc( 100% - 140upx);
+			overflow-y: auto;
+			width: calc( 100% - 120upx);
+			margin-left: 100upx;
+			padding: 20upx 0;
 			.userName{
 				.auther{
 					padding: 2upx 10upx ;
@@ -189,24 +233,25 @@
 			}
 		}
 		.foot{
-			position: fixed;
+			position: relative;
 			bottom: 0;
 			left: 0;
 			width: 100%;
 			background: #f8f8f8;
 			height: 100upx;
-			line-height: 80upx;
 			border-top: 1px solid #dadada;
-			padding: 5upx 20upx 15upx;
+			padding: 10upx 20upx 10upx;
 			box-sizing: border-box;
 			.toName{
+				line-height: 80upx;
 				font-size: 24upx;
 				display: inline-block;
-				vertical-align: middle
+				vertical-align: top
 			}
 			.edit{
+				height: 80upx;
 				display: inline-block;
-				vertical-align: middle;
+				vertical-align: top;
 				font-size: 24upx;
 				padding-left: 10upx;
 			}

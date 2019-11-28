@@ -45,5 +45,8 @@
 		"navigationBarTitleText": "帖子",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
+	},
+	"app-plus": {
+		"softinputNavBar": "none"
 	}
 }

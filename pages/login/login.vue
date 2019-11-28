@@ -49,6 +49,7 @@
 				uni.setStorageSync('time', timeData);
 			},
 			primaryBtn(){
+				let _this = this;
 				if(this.userphone==''||this.userphone.length<4){
 					showTips('用户名不正确')
 					return false;
@@ -62,6 +63,9 @@
 						data:{
 							username:this.userphone,
 							userpwd:this.userpassword
+						},
+						header:{
+							'Content-Type':'application/x-www-form-urlencoded'
 						},
 						method:'POST',
 						success: (res) => {
@@ -88,6 +92,9 @@
 							userpwd:this.userpassword
 						},
 						method:'POST',
+						header:{
+							'Content-Type':'application/x-www-form-urlencoded'
+						},
 						success: (res) => {
 							console.log(res.data.data)
 							if(res.data.code==200){

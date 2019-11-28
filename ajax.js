@@ -2,15 +2,17 @@ let ohref = '';
 //#ifdef H5
 if(process.env.NODE_ENV === 'development'){　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
 	ohref='/dpc'
+	console.log('---444-')
 }else{　　　　　　　　　　　　　　　　　　　　　　
-	ohref='https://api.fanep.cn/tt'
+	ohref='https://tt.ilout.com/tt'
 }　
 //#endif
 
-// #ifdef H5-WEIXIN
-ohref='https://api.fanep.cn/tt'
+// #ifdef MP-WEIXIN
+ohref='https://tt.ilout.com/tt'
 // #endif
 
+console.log(ohref)
 /**
  * 弹出提示框。
  *@title type：string 提示的内容
@@ -22,6 +24,25 @@ export const showTips = (title,icon) => {
     icon: icon||'none'
   });
 }
+
+/***
+ * 加载数据时的Loading。
+ * 加上mask是为了防止loading时，用户操作。
+ */
+export const showLoading = (title) => {
+  uni.showLoading({
+    title: title || '',
+    mask: true
+  })
+}
+/**
+ * 隐藏Loading。
+ * 要和showLoading成对使用。
+ */
+export const hideLoading = () => {
+  uni.hideLoading();
+}
+
 
 export const setTime = (time) => {
 	let actTime = new Date().getTime()
